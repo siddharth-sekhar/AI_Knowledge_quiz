@@ -75,7 +75,7 @@ const Feedback = () => {
           {/* Feedback Message */}
           <div className="feedback-message-card">
             {message === "loading..." ? (
-              <Loader message="Giving your feedback..." />
+              <Loader />
             ) : (
               <div>
                 <h3 className="feedback-message-title">

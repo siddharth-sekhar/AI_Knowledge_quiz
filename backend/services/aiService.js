@@ -3,13 +3,12 @@ import dotenv from "dotenv";
 dotenv.config();
 
 const llm = new ChatGoogleGenerativeAI({
-  model: "gemini-2.0-flash",  // ✅ Updated to a supported model
+  model: "gemini-2.0-flash",  
   apiKey: process.env.GOOGLE_API_KEY,
   temperature: 0.7
 });
 
-// Generate Quiz
-// Helper to safely get text from LangChain response
+
 function getText(response) {
   if (!response) return "";
   if (typeof response.content === "string") {
