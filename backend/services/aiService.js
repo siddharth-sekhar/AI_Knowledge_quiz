@@ -3,11 +3,23 @@ import dotenv from "dotenv";
 dotenv.config();
 
 const llm = new ChatGoogleGenerativeAI({
-  model: "gemini-1.5-flash",   
+  model: "gemini-2.0-flash",  // ✅ Updated to a supported model
   apiKey: process.env.GOOGLE_API_KEY,
   temperature: 0.7
 });
 
+// Generate Quiz
+// Helper to safely get text from LangChain response
+function getText(response) {
+  if (!response) return "";
+  if (typeof response.content === "string") {
+    return response.content; // already plain text
+  }
+  if (Array.isArray(response.content) && response.content[0]?.text) {
+    return response.content[0].text;
+  }
+  return "";
+}
 
 // Generate Quiz
 export async function generateQuiz(topic) {
@@ -29,8 +41,8 @@ Return ONLY JSON in this format:
 
   try {
     const response = await llm.invoke(prompt);
-    // Remove markdown code fences if present
-    let text = response.content.replace(/```json|```/g, "").trim();
+
+    const text = getText(response).replace(/```json|```/g, "").trim();
     return JSON.parse(text);
   } catch (err) {
     console.error("Quiz generation error:", err);
@@ -51,10 +63,11 @@ Give a short motivational feedback message in plain text (not JSON).
   try {
     const response = await llm.invoke(prompt);
 
-    const message = response.content.replace(/```/g, "").trim();
+    const message = getText(response).replace(/```/g, "").trim();
     return { message };
   } catch (err) {
     console.error("Feedback generation error:", err);
     return { error: "Failed to generate feedback" };
   }
 }
+
