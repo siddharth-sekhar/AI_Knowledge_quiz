@@ -12,7 +12,7 @@ const llm = new ChatGoogleGenerativeAI({
 function getText(response) {
   if (!response) return "";
   if (typeof response.content === "string") {
-    return response.content; // already plain text
+    return response.content; 
   }
   if (Array.isArray(response.content) && response.content[0]?.text) {
     return response.content[0].text;
