@@ -197,7 +197,7 @@ Reusable component handling:
 ## 5. Screenshots / Screen Recording
 
 ### Screenshots
-*[Add screenshots here covering all screens]*
+![image_alt](https://github.com/siddharth-sekhar/AI_Knowledge_quiz/blob/3f0b0e47ece8e8515c072b2f08c9bc8367a2b11e/Screenshots-recordings/20250928_014401.jpg)
 
 1. **Home Screen**: Topic selection with quick start buttons and custom input
 2. **Quiz Screen**: Question display with progress bar and navigation
