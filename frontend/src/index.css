@@ -662,7 +662,7 @@ h3 {
   
   /* Theme toggle mobile */
   .theme-toggle-container {
-    top: var(--spacing-md);
+    top: var(--spacing-xl);
     right: var(--spacing-md);
   }
   
@@ -809,7 +809,7 @@ h3 {
   }
   
   .theme-toggle-container {
-    top: var(--spacing-sm);
+    top: var(--spacing-lg);
     right: var(--spacing-sm);
   }
 }
