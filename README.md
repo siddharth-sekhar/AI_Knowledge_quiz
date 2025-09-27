@@ -4,6 +4,8 @@ An intelligent quiz application that generates personalized multiple-choice ques
 
 ## 1. Project Setup & Demo
 
+**Web Demo**: [Live Demo](https://ai-knowledge-quiz.vercel.app/)
+
 ### Environment Setup
 
 **⚠️ Important: Set up environment variables before running the application**
@@ -58,7 +60,6 @@ The application will be available at:
 - `VITE_ENABLE_DEBUG`: Enable debug logging
 
 ### Demo
-- **Web Demo**: [Add hosted link here]
 - **Screen Recording**: [Add screen recording here]
 
 ---
