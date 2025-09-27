@@ -198,6 +198,8 @@ Reusable component handling:
 
 ### Screenshots
 ![image_alt](https://github.com/siddharth-sekhar/AI_Knowledge_quiz/blob/34262361cad14bc07e1e4b47939995552188c219/Screenshots-recordings/20250928_014401.jpg)
+![image_alt](https://github.com/siddharth-sekhar/AI_Knowledge_quiz/blob/2236073b0d16aa6b3ec6b9cff639a94a981920e1/Screenshots-recordings/mall.jpg)
+![image_alt](https://github.com/siddharth-sekhar/AI_Knowledge_quiz/blob/2236073b0d16aa6b3ec6b9cff639a94a981920e1/Screenshots-recordings/m2.jpg)
 
 1. **Home Screen**: Topic selection with quick start buttons and custom input
 2. **Quiz Screen**: Question display with progress bar and navigation
