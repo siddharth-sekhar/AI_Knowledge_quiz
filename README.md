@@ -1,208 +1,296 @@
-# AI Quiz Generator
+# 🧠 AI Quiz Master -  AI-Assisted Knowledge Quiz
 
-A React-based quiz application that generates dynamic quizzes using Google's Gemini AI with consistent JSON output and robust error handling.
+An intelligent quiz application that generates personalized multiple-choice questions using AI and provides custom feedback based on performance.
 
-## 🤖 AI Integration & Prompt Engineering
+## 1. Project Setup & Demo
 
-### AI Prompts & Iterations
+### Environment Setup
 
-#### Initial Prompt Challenges
-Our first approach used basic prompts that resulted in inconsistent outputs:
+**⚠️ Important: Set up environment variables before running the application**
 
-```javascript
-// ❌ Initial problematic prompt
-const prompt = `Generate a quiz about ${topic}`;
-```
+1. **Backend Environment Setup:**
+   ```bash
+   cd backend
+   cp .env.example .env
+   # Edit .env and add your Google AI API key
+   ```
 
-**Issues Faced:**
-- Inconsistent JSON structure
-- Mixed response formats (sometimes wrapped in markdown)
-- Missing required fields
-- Varying question difficulty levels
+2. **Frontend Environment Setup:**
+   ```bash
+   cd frontend
+   cp .env.example .env
+   # Edit .env if needed (default values should work for local development)
+   ```
 
-#### Refined Prompts for Consistent Output
+3. **Required Environment Variables:**
+   - `GOOGLE_API_KEY`: Get your API key from [Google AI Studio](https://makersuite.google.com/app/apikey)
 
-After multiple iterations, we developed structured prompts that ensure consistent JSON output:
-
-```javascript
-// ✅ Refined prompt for quiz generation
-const prompt = `Generate exactly 5 multiple choice questions about ${topic}.
-Return ONLY a valid JSON object with this exact structure:
-{
-  "questions": [
-    {
-      "id": 1,
-      "question": "Clear, specific question text",
-      "options": ["Option A", "Option B", "Option C", "Option D"],
-      "correctAnswer": 0
-    }
-  ]
-}
-
-Requirements:
-- correctAnswer must be index (0-3)
-- Each question must have exactly 4 options
-- Questions should be educational and factual
-- No markdown formatting, no explanations
-- Return only the JSON object`;
-```
-
-```javascript
-// ✅ Refined prompt for feedback generation
-const prompt = `Generate personalized feedback for a quiz performance.
-Topic: ${topic}
-Score: ${score}/${total}
-Accuracy: ${percentage}%
-
-Return ONLY a valid JSON object:
-{
-  "message": "Encouraging feedback message with specific suggestions for improvement"
-}
-
-Requirements:
-- Provide constructive feedback based on performance
-- Include topic-specific improvement suggestions
-- Keep message motivational and educational
-- No markdown, no extra formatting
-- Return only the JSON object`;
-```
-
-#### Prompt Evolution Timeline
-
-1. **v1.0** - Basic text prompts → Inconsistent formats
-2. **v2.0** - Added JSON structure examples → Still had markdown wrapping
-3. **v3.0** - Explicit "ONLY JSON" instructions → Reduced errors by 70%
-4. **v4.0** - Added specific requirements → 95% consistency achieved
-
-### Error Handling & JSON Parsing
-
-Our AI service implements robust error handling for malformed responses:
-
-```javascript
-// Enhanced JSON parsing with error handling
-const parseAIResponse = (response) => {
-  try {
-    // Remove potential markdown code blocks
-    let cleanedResponse = response.replace(/```json\n|\n```|```/g, '').trim();
-    
-    // Parse JSON
-    const parsedData = JSON.parse(cleanedResponse);
-    
-    // Validate structure
-    if (!parsedData.questions || !Array.isArray(parsedData.questions)) {
-      throw new Error('Invalid quiz structure');
-    }
-    
-    return parsedData;
-  } catch (error) {
-    console.error('JSON parsing failed:', error);
-    // Implement retry mechanism
-    throw new Error('Failed to parse AI response');
-  }
-};
-```
-
-### Consistency Measures Implemented
-
-1. **Structured Prompts**: Detailed JSON schema specifications
-2. **Response Validation**: Multi-layer validation of AI responses
-3. **Retry Mechanism**: Automatic retry on malformed responses
-4. **Error Boundaries**: React error boundaries for graceful failures
-5. **Fallback Handling**: Default question sets when AI fails
-
-### AI Output Quality Metrics
-
-- **JSON Consistency**: 95%+ valid JSON responses
-- **Schema Compliance**: 98%+ responses match expected structure
-- **Content Quality**: Educational and factually accurate questions
-- **Response Time**: Average 2-3 seconds per quiz generation
-
-## 🔧 Reusable Components
-
-### Question Component Architecture
-
-Built a modular question component system for consistency:
-
-```jsx
-// Reusable QuestionCard component
-const QuestionCard = ({ 
-  question, 
-  selectedAnswer, 
-  onAnswerSelect, 
-  showResult = false 
-}) => {
-  return (
-    <div className="question-card">
-      <h3 className="question-text">{question.question}</h3>
-      <div className="options-grid">
-        {question.options.map((option, index) => (
-          <button
-            key={index}
-            className={`option-button ${
-              selectedAnswer === index ? 'selected' : ''
-            } ${
-              showResult && index === question.correctAnswer ? 'correct' : ''
-            }`}
-            onClick={() => onAnswerSelect(index)}
-          >
-            <span className="option-label">{String.fromCharCode(65 + index)}</span>
-            {option}
-          </button>
-        ))}
-      </div>
-    </div>
-  );
-};
-```
-
-### Component Reusability Features
-
-- **Flexible Props**: Configurable for different quiz states
-- **Theme Support**: Automatic light/dark mode adaptation
-- **Accessibility**: ARIA labels and keyboard navigation
-- **Responsive Design**: Mobile-first approach
-
-## 🚀 Installation & Setup
-
+### Web Application Setup
 ```bash
-# Clone repository
-git clone https://github.com/siddharth-sekhar/AI_Quiz_Generator.git
+# Backend setup
+cd backend
+npm install
+npm run dev
 
-# Install frontend dependencies
+# Frontend setup (in a new terminal)
 cd frontend
 npm install
-
-# Set up environment variables
-cp .env.example .env.local
-# Add your Google Gemini API key
-
-# Start development server
 npm run dev
 ```
 
-## 📊 AI Performance Monitoring
+The application will be available at:
+- Frontend: `http://localhost:5173`
+- Backend API: `http://localhost:5000`
 
-We track AI response quality through:
+### Environment Variables Reference
 
-- Response time monitoring
-- JSON validation success rates
-- User feedback on question quality
-- Error rate tracking and alerts
+**Backend (.env):**
+- `PORT`: Server port (default: 5000)
+- `NODE_ENV`: Environment mode (development/production)
+- `GOOGLE_API_KEY`: Your Google AI API key (required)
+- `FRONTEND_URL`: Frontend URL for CORS
+- `ALLOWED_ORIGINS`: Comma-separated allowed origins
 
-## 🎯 Future AI Improvements
+**Frontend (.env):**
+- `VITE_API_BASE_URL`: Backend API URL
+- `VITE_API_ENDPOINT`: API endpoint path
+- `VITE_NODE_ENV`: Environment mode
+- `VITE_ENABLE_DEBUG`: Enable debug logging
 
-1. **Dynamic Difficulty**: AI adjusts question difficulty based on user performance
-2. **Content Categorization**: Better topic classification and subtopic generation
-3. **Multi-language Support**: Prompts optimized for different languages
-4. **Adaptive Learning**: AI learns from user preferences and performance
-
-## 📈 Testing & Validation
-
-- **Unit Tests**: Jest tests for AI response parsing
-- **Integration Tests**: End-to-end quiz generation flows
-- **Manual Testing**: Regular validation of AI output quality
-- **User Testing**: Feedback collection on quiz quality
+### Demo
+- **Web Demo**: [Add hosted link here]
+- **Screen Recording**: [Add screen recording here]
 
 ---
 
-*This project demonstrates advanced AI prompt engineering techniques for consistent, reliable output in production applications.*
+## 2. Problem Understanding
+
+### Core Problem
+Create an interactive quiz application that can generate questions on any topic using AI, provide a smooth user experience with navigation between questions, and deliver personalized feedback based on quiz performance.
+
+### Key Requirements
+- Dynamic topic selection (both predefined and custom topics)
+- AI-generated multiple-choice questions with 4 options each
+- Progressive quiz navigation with visual progress indicators
+- Real-time score tracking
+- Personalized AI-generated feedback based on performance
+- Responsive design with modern UI/UX
+
+### Assumptions Made
+- Users prefer immediate feedback over detailed explanations
+- 5 questions per quiz provides optimal engagement without fatigue
+- Multiple-choice format is most accessible for diverse topics
+- Users want the ability to navigate back and forth between questions
+- Dark/light mode toggle enhances user experience
+
+---
+
+## 3. AI Prompts & Iterations
+
+### Initial Quiz Generation Prompt
+```
+Create 5 multiple-choice questions on [topic]. Each question should have 4 options. Return JSON format.
+```
+
+**Issues Faced:**
+- Inconsistent JSON structure (sometimes missing brackets, sometimes extra text)
+- Questions were too generic and lacked depth
+- Options were sometimes too obvious or poorly formatted
+
+### Refined Quiz Generation Prompt
+```
+You are a quiz generator. Create 5 multiple-choice questions on the topic "[topic]".
+Each question should have exactly 4 options.
+Return ONLY JSON in this format:
+
+{
+  "questions": [
+    {
+      "question": "string",
+      "options": ["opt1", "opt2", "opt3", "opt4"],
+      "correctAnswerIndex": 0
+    }
+  ]
+}
+```
+
+**Improvements Made:**
+- Added explicit JSON structure requirements
+- Specified exact format for options array
+- Added clear instructions for correct answer indexing
+- Implemented JSON parsing with error handling and retry logic
+
+### Feedback Generation Prompt Evolution
+**Initial:** Simple score-based feedback
+**Refined:** Context-aware feedback considering topic and performance level
+
+```
+You are a quiz coach. The user took a quiz on "[topic]".
+They scored [score]/5 ([percentage]%).
+Give a short motivational feedback message in plain text (not JSON).
+```
+
+**Challenges Overcome:**
+- AI sometimes returned JSON when plain text was requested
+- Feedback was too generic across different topics
+- Added topic context to make feedback more relevant
+
+---
+
+## 4. Architecture & Code Structure
+
+### Frontend Architecture (React + Vite)
+```
+frontend/src/
+├── App.jsx                 # Main router and navigation management
+├── pages/
+│   ├── Home.jsx           # Topic selection screen
+│   ├── Quiz.jsx           # Question display and navigation
+│   └── Feedback.jsx       # Results and AI-generated feedback
+├── components/
+│   ├── QuestionCard.jsx   # Reusable question component
+│   ├── Loader.jsx         # Loading states
+│   └── ThemeToggle.jsx    # Dark/light mode toggle
+├── contexts/
+│   └── ThemeContext.jsx   # Global theme state management
+└── api/
+    └── quizApi.js         # API service layer
+```
+
+### Backend Architecture (Node.js + Express)
+```
+backend/
+├── index.js              # Server setup and middleware
+├── routes/
+│   └── quizRoutes.js     # API endpoints
+└── services/
+    └── aiService.js      # AI integration with Google Gemini
+```
+
+### State Management
+- **React Context**: Used for theme management across components
+- **Local State**: useState hooks for component-specific state
+- **URL State**: React Router for navigation and data passing
+
+### AI Service Integration
+- **Google Gemini 2.0 Flash**: Primary AI model for content generation
+- **LangChain**: Framework for structured AI interactions
+- **Error Handling**: Retry logic and fallback responses for malformed AI outputs
+
+### Key Components
+
+#### QuestionCard Component
+Reusable component handling:
+- Question display with proper formatting
+- Option selection with visual feedback
+- Answer confirmation display
+
+#### Theme System
+- System preference detection
+- Local storage persistence
+- Smooth transitions between themes
+- CSS custom properties for consistent theming
+
+---
+
+## 5. Screenshots / Screen Recording
+
+### Screenshots
+*[Add screenshots here covering all screens]*
+
+1. **Home Screen**: Topic selection with quick start buttons and custom input
+2. **Quiz Screen**: Question display with progress bar and navigation
+3. **Feedback Screen**: Score display with AI-generated feedback
+4. **Dark Mode**: Application in dark theme
+
+### Screen Recording
+*[Add screen recording here showing complete user flow]*
+
+---
+
+## 6. Known Issues / Improvements
+
+### Current Limitations
+1. **AI Response Parsing**: Occasionally fails to parse malformed JSON responses
+2. **Error Handling**: Limited error recovery for network failures
+3. **Question Quality**: Some generated questions may be too easy or poorly worded
+4. **Performance**: No caching mechanism for repeated topic requests
+5. **Accessibility**: Limited screen reader support and keyboard navigation
+
+### Planned Improvements
+1. **Enhanced Error Handling**: Implement retry mechanisms with exponential backoff
+2. **Question Validation**: Add AI prompt refinement for better question quality
+3. **Caching Layer**: Implement Redis for question caching and faster responses
+4. **Analytics**: Add user interaction tracking and performance metrics
+5. **Question Difficulty**: Implement difficulty levels (Easy, Medium, Hard)
+6. **Offline Support**: Add service worker for offline quiz functionality
+7. **Question Review**: Allow users to review correct answers after completion
+
+### Technical Debt
+- Add comprehensive unit tests for components
+- Implement proper TypeScript migration
+- Add API rate limiting and security headers
+- Optimize bundle size with code splitting
+
+---
+
+## 7. Bonus Work
+
+### Additional Features Implemented
+
+#### 🌙 Dark Mode Support
+- System preference detection
+- Smooth theme transitions
+- Persistent theme selection
+- Comprehensive dark theme styling
+
+#### 🎨 Modern UI/UX
+- Responsive design for all screen sizes
+- Smooth animations and transitions
+- Progress indicators with visual feedback
+- Intuitive navigation with disabled state management
+
+#### 🚀 Enhanced User Experience
+- Custom topic input with validation
+- Quick start topic buttons for common subjects
+- Real-time answer selection feedback
+- Visual score representation with emoji indicators
+
+#### 🔧 Developer Experience
+- Hot reload support with Vite
+- ESLint configuration for code quality
+- Modular component architecture
+- Clean separation of concerns
+
+### AI Usage Guidance
+- **Consistent JSON Output**: Prompts are designed to produce reliable JSON structures
+- **Error Handling**: Implemented retry logic for malformed AI responses
+- **Reusable Components**: Built modular question components for maintainability
+- **Prompt Engineering**: Refined prompts through iteration for better results
+
+---
+
+## Tech Stack
+
+### Frontend
+- **React 19.1.1** - UI framework
+- **Vite** - Build tool and dev server
+- **React Router DOM** - Client-side routing
+- **Axios** - HTTP client
+- **CSS Custom Properties** - Theming system
+
+### Backend
+- **Node.js** - Runtime environment
+- **Express.js** - Web framework
+- **Google Gemini 2.0 Flash** - AI model
+- **LangChain** - AI framework
+- **CORS** - Cross-origin resource sharing
+
+### Development Tools
+- **ESLint** - Code linting
+- **Nodemon** - Development server
+- **Git** - Version control
+
+---
+
+*This project demonstrates the integration of modern web technologies with AI capabilities to create an engaging and educational user experience.*
