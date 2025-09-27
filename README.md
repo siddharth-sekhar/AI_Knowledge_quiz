@@ -4,7 +4,7 @@ An intelligent quiz application that generates personalized multiple-choice ques
 
 ## 1. Project Setup & Demo
 
-**Web Demo**: [Live Demo](https://ai-knowledge-quiz.vercel.app/)
+**Deployed Project**: [Live Demo](https://ai-knowledge-quiz.vercel.app/)
 
 ### Environment Setup
 
