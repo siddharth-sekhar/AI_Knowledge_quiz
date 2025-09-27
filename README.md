@@ -1,6 +1,6 @@
 # 🧠 AI Quiz Master -  AI-Assisted Knowledge Quiz
 
-An intelligent quiz application that generates personalized multiple-choice questions using AI and provides custom feedback based on performance.
+An intelligent quiz application that generates personalized multiple-choice questions using AI and provides custom feedback based on performance. Features a fully responsive design optimized for mobile devices.
 
 ## 1. Project Setup & Demo
 
@@ -246,7 +246,8 @@ Reusable component handling:
 - Comprehensive dark theme styling
 
 #### 🎨 Modern UI/UX
-- Responsive design for all screen sizes
+- Fully responsive design optimized for mobile, tablet, and desktop
+- Touch-friendly interface with minimum 44px touch targets
 - Smooth animations and transitions
 - Progress indicators with visual feedback
 - Intuitive navigation with disabled state management
