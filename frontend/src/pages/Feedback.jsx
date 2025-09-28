@@ -1,12 +1,17 @@
 import { useEffect, useState } from "react";
-import { useParams, useNavigate } from "react-router-dom";
+import { useParams, useNavigate, useLocation } from "react-router-dom";
 import { generateFeedback } from "../api/quizApi";
 import Loader from "../components/Loader";
+import QuestionReview from "../components/QuestionReview";
 
 const Feedback = () => {
   const { score, topic } = useParams();
   const [message, setMessage] = useState("");
   const navigate = useNavigate();
+  const location = useLocation();
+  
+  // Get quiz data from navigation state
+  const quizData = location.state;
 
   useEffect(() => {
     const fetchFeedback = async () => {
@@ -104,6 +109,16 @@ const Feedback = () => {
             </button>
           </div>
         </div>
+
+        {/* Question Review */}
+        {quizData && quizData.questions && quizData.userAnswers && (
+          <div className="card">
+            <QuestionReview 
+              questions={quizData.questions} 
+              userAnswers={quizData.userAnswers} 
+            />
+          </div>
+        )}
       </div>
     </div>
   );

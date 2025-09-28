@@ -13,6 +13,7 @@ const Quiz = () => {
   const [currentIndex, setCurrentIndex] = useState(0);
   const [selectedAnswer, setSelectedAnswer] = useState(null);
   const [score, setScore] = useState(0);
+  const [userAnswers, setUserAnswers] = useState([]);
 
   useEffect(() => {
     const fetchQuiz = async () => {
@@ -30,15 +31,28 @@ const Quiz = () => {
   }, [topic]);
 
   const handleNext = () => {
+    // Store the user's answer for this question
+    const updatedAnswers = [...userAnswers];
+    updatedAnswers[currentIndex] = selectedAnswer;
+    setUserAnswers(updatedAnswers);
+
     if (selectedAnswer === questions[currentIndex].correctAnswerIndex) {
       setScore((prev) => prev + 1);
     }
+    
     setSelectedAnswer(null);
+    
     if (currentIndex + 1 < questions.length) {
       setCurrentIndex((prev) => prev + 1);
     } else {
       const finalScore = score + (selectedAnswer === questions[currentIndex].correctAnswerIndex ? 1 : 0);
-      navigate(`/feedback/${finalScore}/${encodeURIComponent(topic)}`);
+      // Pass quiz data through navigation state
+      navigate(`/feedback/${finalScore}/${encodeURIComponent(topic)}`, {
+        state: {
+          questions: questions,
+          userAnswers: updatedAnswers
+        }
+      });
     }
   };
 
