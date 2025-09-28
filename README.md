@@ -75,6 +75,7 @@ Create an interactive quiz application that can generate questions on any topic 
 - Progressive quiz navigation with visual progress indicators
 - Real-time score tracking
 - Personalized AI-generated feedback based on performance
+- Comprehensive question review with correct answers
 - Responsive design with modern UI/UX
 
 ### Assumptions Made
@@ -82,6 +83,7 @@ Create an interactive quiz application that can generate questions on any topic 
 - 5 questions per quiz provides optimal engagement without fatigue
 - Multiple-choice format is most accessible for diverse topics
 - Users want the ability to navigate back and forth between questions
+- Users benefit from reviewing correct answers after quiz completion
 - Dark/light mode toggle enhances user experience
 
 ---
@@ -150,6 +152,7 @@ frontend/src/
 │   └── Feedback.jsx       # Results and AI-generated feedback
 ├── components/
 │   ├── QuestionCard.jsx   # Reusable question component
+│   ├── QuestionReview.jsx # Question review with answers
 │   ├── Loader.jsx         # Loading states
 │   └── ThemeToggle.jsx    # Dark/light mode toggle
 ├── contexts/
@@ -186,6 +189,14 @@ Reusable component handling:
 - Option selection with visual feedback
 - Answer confirmation display
 
+#### QuestionReview Component
+Educational review component featuring:
+- Complete question and answer display
+- Visual indicators (✅/❌) for correct/incorrect answers
+- Color-coded correct answers (green) and wrong selections (red)
+- Question numbering and organized layout
+- Mobile-responsive design with touch-friendly interface
+
 #### Theme System
 - System preference detection
 - Local storage persistence
@@ -203,14 +214,14 @@ Reusable component handling:
 ![image_alt](https://github.com/siddharth-sekhar/AI_Knowledge_quiz/blob/113381d5fe5a0297f108213d1c72b9d92a928446/AI_Knowledge_quiz_scrnshots_recording/m2_new.jpg)
 ![image_alt](https://github.com/siddharth-sekhar/AI_Knowledge_quiz/blob/113381d5fe5a0297f108213d1c72b9d92a928446/AI_Knowledge_quiz_scrnshots_recording/m_final.jpg)
 
-
 1. **Home Screen**: Topic selection with quick start buttons and custom input
 2. **Quiz Screen**: Question display with progress bar and navigation
-3. **Feedback Screen**: Score display with AI-generated feedback
-4. **Dark Mode**: Application in dark theme
+3. **Feedback Screen**: Score display with AI-generated feedback and question review
+4. **Question Review**: Detailed review showing correct answers with visual indicators
+5. **Dark Mode**: Application in dark theme
 
 ### Screen Recording
-*[Add screen recording here showing complete user flow]*
+https://github.com/user-attachments/assets/8c1aa8f0-26b7-4aad-b31c-2d749fa4d559
 
 ---
 
@@ -230,7 +241,7 @@ Reusable component handling:
 4. **Analytics**: Add user interaction tracking and performance metrics
 5. **Question Difficulty**: Implement difficulty levels (Easy, Medium, Hard)
 6. **Offline Support**: Add service worker for offline quiz functionality
-7. **Question Review**: Allow users to review correct answers after completion
+7. **Export Results**: Allow users to export quiz results and review summaries
 
 ### Technical Debt
 - Add comprehensive unit tests for components
@@ -243,6 +254,13 @@ Reusable component handling:
 ## 7. Bonus Work
 
 ### Additional Features Implemented
+
+#### 📋 Question Review System
+- Comprehensive post-quiz review showing all questions and answers
+- Visual indicators (✅/❌) for correct and incorrect responses
+- Color-coded answer highlighting (green for correct, red for wrong)
+- Question numbering and organized layout for easy reference
+- Mobile-optimized design with touch-friendly interface
 
 #### 🌙 Dark Mode Support
 - System preference detection
@@ -262,6 +280,7 @@ Reusable component handling:
 - Quick start topic buttons for common subjects
 - Real-time answer selection feedback
 - Visual score representation with emoji indicators
+- Educational post-quiz review for learning reinforcement
 
 #### 🔧 Developer Experience
 - Hot reload support with Vite
@@ -300,4 +319,4 @@ Reusable component handling:
 
 ---
 
-*This project demonstrates the integration of modern web technologies with AI capabilities to create an engaging and educational user experience.*
+*This project demonstrates the integration of modern web technologies with AI capabilities to create an engaging and educational user experience with comprehensive learning feedback.*
