@@ -200,6 +200,8 @@ Reusable component handling:
 ![image_alt](https://github.com/siddharth-sekhar/AI_Knowledge_quiz/blob/34262361cad14bc07e1e4b47939995552188c219/Screenshots-recordings/20250928_014401.jpg)
 ![image_alt](https://github.com/siddharth-sekhar/AI_Knowledge_quiz/blob/ee3e1a1036250e87b609616165468d06caaa24c3/AI_Knowledge_quiz_scrnshots_recording/QR.jpg)
 ![image_alt](https://github.com/siddharth-sekhar/AI_Knowledge_quiz/blob/ee3e1a1036250e87b609616165468d06caaa24c3/AI_Knowledge_quiz_scrnshots_recording/WhatsApp%20Image%202025-09-28%20at%2002.03.34_18e27e4e.jpg)
+![image_alt](https://github.com/siddharth-sekhar/AI_Knowledge_quiz/blob/113381d5fe5a0297f108213d1c72b9d92a928446/AI_Knowledge_quiz_scrnshots_recording/m2_new.jpg)
+![image_alt](https://github.com/siddharth-sekhar/AI_Knowledge_quiz/blob/113381d5fe5a0297f108213d1c72b9d92a928446/AI_Knowledge_quiz_scrnshots_recording/m_final.jpg)
 
 
 1. **Home Screen**: Topic selection with quick start buttons and custom input
