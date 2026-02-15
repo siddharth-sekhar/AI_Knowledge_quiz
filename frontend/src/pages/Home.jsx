@@ -45,7 +45,7 @@ const Home = () => {
               className="topic-textarea" 
               value={customTopic}
               onChange={handleTopicChange}
-              placeholder="Enter any topic you want to be quizzed on... (e.g., React Hooks, World War II, Python Functions, etc.)"
+              placeholder="Enter any topic you want to be quizzed on... (e.g., Mathematics, Football, World War II etc.)"
               rows={3}
             />
             
